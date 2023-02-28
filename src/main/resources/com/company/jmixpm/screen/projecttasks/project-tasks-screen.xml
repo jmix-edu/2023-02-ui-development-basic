@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://projectTasksScreen.caption">
+    <data>
+        <collection id="tasksDc"
+                    class="com.company.jmixpm.entity.Task">
+            <fetchPlan extends="_base">
+                <property name="project" fetchPlan="_instance_name"/>
+                <property name="assignee" fetchPlan="_instance_name"/>
+            </fetchPlan>
+            <loader id="tasksDl">
+                <query><![CDATA[select e from Task_ e where e.project.id = :projectId]]></query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode width="50%" height="50%"/>
+    <layout expand="tasksTable">
+        <table id="tasksTable"
+               width="100%"
+               dataContainer="tasksDc">
+            <simplePagination/>
+            <columns>
+                <column id="name"/>
+                <column id="project"/>
+                <column id="assignee"/>
+                <column id="startDate"/>
+                <column id="estimatedEfforts"/>
+            </columns>
+        </table>
+    </layout>
+</window>
